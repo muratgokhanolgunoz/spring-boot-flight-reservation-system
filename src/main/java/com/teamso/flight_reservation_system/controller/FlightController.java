@@ -1,11 +1,8 @@
 package com.teamso.flight_reservation_system.controller;
 
-import com.teamso.flight_reservation_system.dto.FlightDto;
-import com.teamso.flight_reservation_system.dto.SeatDto;
+import com.teamso.flight_reservation_system.dto.request.FlightRequestDto;
 import com.teamso.flight_reservation_system.entity.Flight;
-import com.teamso.flight_reservation_system.entity.Seat;
 import com.teamso.flight_reservation_system.service.FlightService;
-import com.teamso.flight_reservation_system.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,23 +15,21 @@ import java.util.Optional;
 public class FlightController {
 
     private final FlightService flightService;
-    private final SeatService seatService;
 
     @Autowired
-    public FlightController(FlightService flightService, SeatService seatService) {
+    public FlightController(FlightService flightService) {
         this.flightService = flightService;
-        this.seatService = seatService;
     }
 
     @PostMapping
-    public ResponseEntity<Flight> create(@RequestBody FlightDto flightDto) {
-        Flight flight = flightService.create(flightDto);
+    public ResponseEntity<Flight> create(@RequestBody FlightRequestDto flightRequestDto) {
+        Flight flight = flightService.create(flightRequestDto);
         return ResponseEntity.ok(flight);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Flight> update(@PathVariable Long id, @RequestBody FlightDto flightDto) {
-        Flight updatedFlight = flightService.update(id, flightDto);
+    public ResponseEntity<Flight> update(@PathVariable Long id, @RequestBody FlightRequestDto flightRequestDto) {
+        Flight updatedFlight = flightService.update(id, flightRequestDto);
         return ResponseEntity.ok(updatedFlight);
     }
 
@@ -52,23 +47,5 @@ public class FlightController {
     @GetMapping
     public ResponseEntity<List<Flight>> getAll() {
         return ResponseEntity.ok(flightService.getAll());
-    }
-
-    @PostMapping("/{flightId}/seat")
-    public ResponseEntity<Seat> createSeat(@PathVariable Long flightId, @RequestBody SeatDto seatDto) {
-        Seat seat = seatService.create(flightId, seatDto);
-        return ResponseEntity.ok(seat);
-    }
-
-    @PutMapping("/{flightId}/seat/{seatId}")
-    public ResponseEntity<Seat> updateSeat(@PathVariable Long flightId, @PathVariable Long seatId, @RequestBody SeatDto seatDto) {
-        Seat updatedSeat = seatService.update(flightId, seatId, seatDto);
-        return ResponseEntity.ok(updatedSeat);
-    }
-
-    @DeleteMapping("/{flightId}/seat/{seatId}")
-    public ResponseEntity<String> deleteSeat(@PathVariable Long flightId, @PathVariable Long seatId) {
-        seatService.delete(flightId, seatId);
-        return ResponseEntity.ok("Seat deleted successfully");
     }
 }

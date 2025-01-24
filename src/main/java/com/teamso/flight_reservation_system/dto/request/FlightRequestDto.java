@@ -1,9 +1,9 @@
-package com.teamso.flight_reservation_system.dto;
+package com.teamso.flight_reservation_system.dto.request;
 
 import lombok.Data;
 
 @Data
-public class FlightDto {
+public class FlightRequestDto {
     private String name;
     private String description;
     private double price;

@@ -1,6 +1,7 @@
 package com.teamso.flight_reservation_system.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +23,8 @@ public class Seat {
     @Column(name = "seat_number")
     private String seatNumber;
 
-    private boolean purchased;
+    @Column(name = "is_purchased")
+    private boolean isPurchased;
 
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)

@@ -1,6 +1,6 @@
 package com.teamso.flight_reservation_system.controller;
 
-import com.teamso.flight_reservation_system.dto.UserDto;
+import com.teamso.flight_reservation_system.dto.request.UserRequestDto;
 import com.teamso.flight_reservation_system.entity.User;
 import com.teamso.flight_reservation_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userService.create(userDto));
+    public ResponseEntity<User> create(@RequestBody UserRequestDto userRequestDto) {
+        return ResponseEntity.ok(userService.create(userRequestDto));
     }
 }

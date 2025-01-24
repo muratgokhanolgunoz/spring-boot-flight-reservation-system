@@ -1,6 +1,6 @@
 package com.teamso.flight_reservation_system.service;
 
-import com.teamso.flight_reservation_system.dto.FlightDto;
+import com.teamso.flight_reservation_system.dto.request.FlightRequestDto;
 import com.teamso.flight_reservation_system.entity.Airport;
 import com.teamso.flight_reservation_system.entity.Flight;
 import com.teamso.flight_reservation_system.repository.FlightRepository;
@@ -24,16 +24,16 @@ public class FlightService {
     }
 
     @Transactional
-    public Flight create(FlightDto flightDto) throws IllegalArgumentException {
-        Airport departureAirport = airportService.getById(flightDto.getDepartureAirportId())
+    public Flight create(FlightRequestDto flightRequestDto) throws IllegalArgumentException {
+        Airport departureAirport = airportService.getById(flightRequestDto.getDepartureAirportId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid departure airport ID"));
-        Airport arrivalAirport = airportService.getById(flightDto.getArrivalAirportId())
+        Airport arrivalAirport = airportService.getById(flightRequestDto.getArrivalAirportId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid arrival airport ID"));
 
         Flight flight = Flight.builder()
-                .name(flightDto.getName())
-                .description(flightDto.getDescription())
-                .price(flightDto.getPrice())
+                .name(flightRequestDto.getName())
+                .description(flightRequestDto.getDescription())
+                .price(flightRequestDto.getPrice())
                 .departureAirport(departureAirport)
                 .arrivalAirport(arrivalAirport)
                 .build();
@@ -42,18 +42,18 @@ public class FlightService {
     }
 
     @Transactional
-    public Flight update(Long id, FlightDto flightDto) throws IllegalArgumentException {
+    public Flight update(Long id, FlightRequestDto flightRequestDto) throws IllegalArgumentException {
         Flight flight = flightRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Flight not found"));
 
-        Airport departureAirport = airportService.getById(flightDto.getDepartureAirportId())
+        Airport departureAirport = airportService.getById(flightRequestDto.getDepartureAirportId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid departure airport ID"));
-        Airport arrivalAirport = airportService.getById(flightDto.getArrivalAirportId())
+        Airport arrivalAirport = airportService.getById(flightRequestDto.getArrivalAirportId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid arrival airport ID"));
 
-        flight.setName(flightDto.getName());
-        flight.setDescription(flightDto.getDescription());
-        flight.setPrice(flightDto.getPrice());
+        flight.setName(flightRequestDto.getName());
+        flight.setDescription(flightRequestDto.getDescription());
+        flight.setPrice(flightRequestDto.getPrice());
         flight.setDepartureAirport(departureAirport);
         flight.setArrivalAirport(arrivalAirport);
 

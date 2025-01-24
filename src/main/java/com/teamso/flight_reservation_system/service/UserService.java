@@ -1,6 +1,6 @@
 package com.teamso.flight_reservation_system.service;
 
-import com.teamso.flight_reservation_system.dto.UserDto;
+import com.teamso.flight_reservation_system.dto.request.UserRequestDto;
 import com.teamso.flight_reservation_system.entity.User;
 import com.teamso.flight_reservation_system.repository.UserRepository;
 import javax.transaction.Transactional;
@@ -19,11 +19,11 @@ public class UserService {
     }
 
     @Transactional
-    public User create(UserDto userDto) {
+    public User create(UserRequestDto userRequestDto) {
         User user = User.builder()
-                .firstName(userDto.getFistName())
-                .lastName(userDto.getLastName())
-                .email(userDto.getEmail())
+                .firstName(userRequestDto.getFirstName())
+                .lastName(userRequestDto.getLastName())
+                .email(userRequestDto.getEmail())
                 .build();
 
         return userRepository.save(user);

@@ -1,6 +1,6 @@
 package com.teamso.flight_reservation_system.controller;
 
-import com.teamso.flight_reservation_system.dto.ReservationDto;
+import com.teamso.flight_reservation_system.dto.request.ReservationRequestDto;
 import com.teamso.flight_reservation_system.entity.Reservation;
 import com.teamso.flight_reservation_system.service.ReservationService;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<Reservation> create(@RequestBody ReservationDto reservationDto) {
-        Reservation reservation = reservationService.create(reservationDto);
+    public ResponseEntity<Reservation> create(@RequestBody ReservationRequestDto reservationRequestDto) {
+        Reservation reservation = reservationService.create(reservationRequestDto);
         return ResponseEntity.ok(reservation);
     }
 }
