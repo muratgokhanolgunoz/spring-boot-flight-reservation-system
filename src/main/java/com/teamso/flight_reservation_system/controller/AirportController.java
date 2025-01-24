@@ -21,19 +21,19 @@ public class AirportController {
     }
 
     @PostMapping
-    public ResponseEntity<Airport> addAirport(@RequestBody Airport airport) {
-        Airport newAirport = airportService.add(airport);
+    public ResponseEntity<Airport> create(@RequestBody Airport airport) {
+        Airport newAirport = airportService.create(airport);
         return ResponseEntity.ok(newAirport);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Airport> updateAirport(@PathVariable Long id, @RequestBody Airport airport) {
+    public ResponseEntity<Airport> update(@PathVariable Long id, @RequestBody Airport airport) {
         Airport updatedAirport = airportService.update(id, airport);
         return ResponseEntity.ok(updatedAirport);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAirport(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         airportService.delete(id);
         return ResponseEntity.ok("Airport deleted successfully");
     }

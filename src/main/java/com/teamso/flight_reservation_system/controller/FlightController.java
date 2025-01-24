@@ -27,8 +27,8 @@ public class FlightController {
     }
 
     @PostMapping
-    public ResponseEntity<Flight> add(@RequestBody FlightDto flightDto) {
-        Flight flight = flightService.add(flightDto);
+    public ResponseEntity<Flight> create(@RequestBody FlightDto flightDto) {
+        Flight flight = flightService.create(flightDto);
         return ResponseEntity.ok(flight);
     }
 
@@ -55,8 +55,8 @@ public class FlightController {
     }
 
     @PostMapping("/{flightId}/seat")
-    public ResponseEntity<Seat> addSeat(@PathVariable Long flightId, @RequestBody SeatDto seatDto) {
-        Seat seat = seatService.add(flightId, seatDto);
+    public ResponseEntity<Seat> createSeat(@PathVariable Long flightId, @RequestBody SeatDto seatDto) {
+        Seat seat = seatService.create(flightId, seatDto);
         return ResponseEntity.ok(seat);
     }
 

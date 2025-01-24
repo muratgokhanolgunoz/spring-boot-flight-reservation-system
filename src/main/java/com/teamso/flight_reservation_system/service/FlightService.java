@@ -24,7 +24,7 @@ public class FlightService {
     }
 
     @Transactional
-    public Flight add(FlightDto flightDto) throws IllegalArgumentException {
+    public Flight create(FlightDto flightDto) throws IllegalArgumentException {
         Airport departureAirport = airportService.getById(flightDto.getDepartureAirportId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid departure airport ID"));
         Airport arrivalAirport = airportService.getById(flightDto.getArrivalAirportId())

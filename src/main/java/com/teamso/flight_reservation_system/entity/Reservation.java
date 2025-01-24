@@ -1,34 +1,33 @@
 package com.teamso.flight_reservation_system.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "seats")
-public class Seat {
+@Table(name = "reservations")
+public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "seat_number")
-    private String seatNumber;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    private boolean purchased;
+    @ManyToOne
+    @JoinColumn(name = "seat_id", nullable = false)
+    private Seat seat;
 
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
-    @JsonIgnore
     private Flight flight;
-
-    @Version
-    private Integer version;
 }
+

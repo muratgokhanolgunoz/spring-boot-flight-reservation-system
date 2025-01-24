@@ -20,12 +20,12 @@ public class AirportService {
     }
 
     @Transactional
-    public Airport add(Airport airport) {
+    public Airport create(Airport airport) {
         return airportRepository.save(airport);
     }
 
     @Transactional
-    public Airport update(Long id, Airport airport) {
+    public Airport update(Long id, Airport airport) throws IllegalArgumentException {
         Airport existingAirport = airportRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Airport not found"));
 
